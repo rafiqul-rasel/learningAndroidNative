@@ -3,27 +3,26 @@ package io.rasel.databinding
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import io.rasel.databinding.ViewModels.MainActivityViewModel
 import io.rasel.databinding.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel:MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Initialize View Binding
+        viewModel= ViewModelProvider(this)[MainActivityViewModel::class.java]
+        // Initialize View Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.button.text = "Show"
-        binding.progressBar.visibility= View.GONE
+        binding.button.text = "Click to Count Increase"
+        binding.textView.text =viewModel.getCount().toString()
+
         binding.button.setOnClickListener {
-           if(binding.progressBar.visibility== View.GONE) {
-               binding.button.text = "Hide"
-               binding.progressBar.visibility= View.VISIBLE
-           }else{
-               binding.button.text = "Show"
-               binding.progressBar.visibility= View.GONE
-           }
+            binding.textView.text =viewModel.updateCount().toString()
         }
     }
 }
