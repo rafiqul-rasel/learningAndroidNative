@@ -2,7 +2,6 @@ package io.rasel.databinding
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import io.rasel.databinding.ViewModels.MainActivityViewModel
 import io.rasel.databinding.databinding.ActivityMainBinding
@@ -22,7 +21,9 @@ class MainActivity : AppCompatActivity() {
         binding.textView.text =viewModel.getCount().toString()
 
         binding.button.setOnClickListener {
-            binding.textView.text =viewModel.updateCount().toString()
+            var inputText=binding.editText.text.toString().toInt()
+            binding.textView.text =viewModel.updateCount(inputText).toString()
+            binding.editText.setText("")
         }
     }
 }

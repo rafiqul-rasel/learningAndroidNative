@@ -8,7 +8,8 @@ class MainActivityViewModel:ViewModel() {
     fun getCount():Int{
         return count
     }
-    fun updateCount():Int{
-        return ++count
+    fun updateCount(inputText: Int):Int{
+        count+=inputText
+        return count
     }
 }
