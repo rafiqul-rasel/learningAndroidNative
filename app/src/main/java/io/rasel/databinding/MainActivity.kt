@@ -21,9 +21,13 @@ class MainActivity : AppCompatActivity() {
         binding.textView.text =viewModel.getCount().toString()
 
         binding.button.setOnClickListener {
-            var inputText=binding.editText.text.toString().toInt()
+            var inputText=convertToInteger(binding.editText.text.toString())
             binding.textView.text =viewModel.updateCount(inputText).toString()
             binding.editText.setText("")
         }
+    }
+    fun convertToInteger(text: String): Int {
+        val result = text.toIntOrNull()
+        return result ?: 0
     }
 }
